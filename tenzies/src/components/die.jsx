@@ -10,5 +10,5 @@ export default function Die(props) {
         props.handleDieClick(props.id)
     }
 
-    return <button className={props.removed ? "die-disabled" : "die"} onClick={onClick}>{props.value}</button>
+    return <button className={props.outOfGame ? "die-disabled" : "die"} onClick={onClick}>{props.value}</button>
 }
