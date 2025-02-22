@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import { clsx } from "clsx"
 import { languages } from "./languages"
 import { getFarewellText } from "./utils"
@@ -36,6 +36,21 @@ export default function AssemblyEndgame() {
     const isGameOver = isGameWon || isGameLost
     const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
     const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+
+    // useEffect keyboard events
+    useEffect(() => {
+        console.log("useEffect")
+        function handleKeyDown(event) {
+            const { key } = event
+            if (alphabet.includes(key)) {
+                addGuessedLetter(key)
+            }
+        }
+        window.addEventListener("keydown", handleKeyDown)
+        return () => window.removeEventListener("keydown", handleKeyDown)
+    }, [guessedLetters])
+
+
 
     // Static values
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -135,17 +150,23 @@ export default function AssemblyEndgame() {
         setGuessedLetters([])
     }
 
+    let handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            console.log('enter press here! ')
+        }
+    }
+
     return (
         <main>
             <header>
                 <h1>Assembly: Endgame</h1>
                 <p>Guess the word within 8 attempts to keep the
-                programming world safe from Assembly!</p>
+                    programming world safe from Assembly!</p>
             </header>
 
-            <section 
-                aria-live="polite" 
-                role="status" 
+            <section
+                aria-live="polite"
+                role="status"
                 className={gameStatusClass}
             >
                 {renderGameStatus()}
@@ -158,24 +179,24 @@ export default function AssemblyEndgame() {
             <section className="word">
                 {letterElements}
             </section>
-            
+
             {/* Combined visually-hidden aria-live region for status updates */}
-            <section 
-                className="sr-only" 
-                aria-live="polite" 
+            <section
+                className="sr-only"
+                aria-live="polite"
                 role="status"
             >
                 <p>
-                    {currentWord.includes(lastGuessedLetter) ? 
-                        `Correct! The letter ${lastGuessedLetter} is in the word.` : 
+                    {currentWord.includes(lastGuessedLetter) ?
+                        `Correct! The letter ${lastGuessedLetter} is in the word.` :
                         `Sorry, the letter ${lastGuessedLetter} is not in the word.`
                     }
                     You have {numGuessesLeft} attempts left.
                 </p>
-                <p>Current word: {currentWord.split("").map(letter => 
-                guessedLetters.includes(letter) ? letter + "." : "blank.")
-                .join(" ")}</p>
-            
+                <p>Current word: {currentWord.split("").map(letter =>
+                    guessedLetters.includes(letter) ? letter + "." : "blank.")
+                    .join(" ")}</p>
+
             </section>
 
             <section className="keyboard">
