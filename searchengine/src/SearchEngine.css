@@ -1,0 +1,80 @@
+.app{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.search-form-header {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.search-engine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d1d1;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Center items horizontally */
+    margin-bottom: 20px;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 700px;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    background-color: rgb(255, 255, 255);
+}
+
+.search-input:focus {
+    outline: none; /* Remove the outline when the input is focused */
+}
+
+.search-button {
+    align-self: end;
+    width: 40px; /* Set width */
+    height: 40px; /* Set height */
+    background-size: 25px; /* Set the size of the icon */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('./assets/up-loading.png');
+    border: none;
+    border-radius: 50%; /* Make the button round */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+}
+
+.search-button:hover {
+    background: rgba(0, 0, 0, 0.1); /* Smokescreen effect */
+    opacity: 1; /* Fully opaque on hover */
+}
+
+.search-results {
+    list-style: none;
+    padding: 0;
+}
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
